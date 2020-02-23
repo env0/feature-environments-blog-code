@@ -7,11 +7,12 @@ if [ -z "$ENVIRONMENT" ]
     echo "No environment name supplied"
     exit 1
 fi
+DEPLOY_TIME=$(date)
 
 echo "Deploying environment $ENVIRONMENT"
 
 echo "Injecting env vars"
-sed 's/!!!ENVIRONMENT!!!/'"$ENVIRONMENT"'/g' index.template.html > $ENVIRONMENT.index.html
+sed 's/!!!ENVIRONMENT!!!/'"$ENVIRONMENT"'/g; s/!!!DEPLOY_TIME!!!/'"$DEPLOY_TIME"'/g' index.template.html > $ENVIRONMENT.index.html
 
 echo "Applying Terraform "
 terraform init
