@@ -1,0 +1,14 @@
+name: "PR Environments"
+on:
+  pull_request:
+    types:
+      - created
+      - closed
+      - synchronize
+jobs:
+  create_environment:
+    name: "Create Environment"
+    runs-on: node:lts
+    steps:
+      - name: test-node
+        run: node -v
