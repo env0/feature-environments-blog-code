@@ -25,11 +25,11 @@ jobs:
         working-directory: node
         run: >
           node env0-deploy-cli.js
-          -k ${{ secrets.ENV0_API_KEY_ID }}
-          -s ${{ secrets.ENV0_API_KEY_SECRET }}
-          -a $ACTION
-          -o ${{ secrets.ENV0_ORG_ID }}
-          -p ${{ secrets.ENV0_PROJECT_ID }}
-          -b ${{ secrets.ENV0_BLUEPRINT_ID }}
-          -e "${{ github.head_ref }}"
+          --apiKey ${{ secrets.ENV0_API_KEY_ID }}
+          --apiSecret ${{ secrets.ENV0_API_KEY_SECRET }}
+          --action $ACTION
+          --organizationId ${{ secrets.ENV0_ORG_ID }}
+          --projectId ${{ secrets.ENV0_PROJECT_ID }}
+          --blueprintId ${{ secrets.ENV0_BLUEPRINT_ID }}
+          --environmentName "${{ github.head_ref }}"
 
