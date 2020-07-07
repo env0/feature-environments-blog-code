@@ -12,7 +12,7 @@ jobs:
           node-version: '12'
       - uses: actions/checkout@v2
         with:
-          repository: https://github.com/env0/env0-client-integrations.git
+          repository: env0/env0-client-integrations
       - name: install
         run: yarn
       - name: deploy
