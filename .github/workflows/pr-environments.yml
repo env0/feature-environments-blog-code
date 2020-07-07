@@ -3,16 +3,12 @@ on:
   pull_request:
     types: [opened, closed, reopened, synchronize]
 jobs:
-  create_environment:
-    name: "Create Environment"
+  env0_pr_environment:
+    name: "PR Environment"
     runs-on: ubuntu-16.04
     env:
       ACTION: deploy
     steps:
-      - name: Dump github context
-        run: echo "$GITHUB_CONTEXT"
-        env:
-          GITHUB_CONTEXT: ${{ toJson(github) }}
       - name: Set Action
         if: github.event.action == 'closed'
         run: echo "::set-env name=ACTION::destroy"
