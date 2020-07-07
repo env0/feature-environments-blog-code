@@ -14,7 +14,7 @@ jobs:
         with:
           repository: env0/env0-client-integrations
       - name: install
-        working-directory: env0-client-integrations/node
+        working-directory: node
         run: yarn
       - name: deploy
         run: ./scripts/deploy-env.sh
