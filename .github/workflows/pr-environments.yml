@@ -5,7 +5,15 @@ on:
 jobs:
   create_environment:
     name: "Create Environment"
-    runs-on: node:lts
+    runs-on: ubuntu-16.04
     steps:
+      - uses: actions/setup-node@v1
+        with:
+          node-version: '12'
+      - uses: actions/checkout@v2
+        with:
+          repository: https://github.com/env0/env0-client-integrations.git
+      - name: install
+        run: yarn
       - name: deploy
         run: ./scripts/deploy-env.sh
