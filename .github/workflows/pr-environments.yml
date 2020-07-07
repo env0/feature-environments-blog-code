@@ -1,10 +1,7 @@
 name: "PR Environments"
 on:
   pull_request:
-    types:
-      - created
-      - closed
-      - synchronize
+    types: [opened, closed, reopened, synchronize]
 jobs:
   create_environment:
     name: "Create Environment"
