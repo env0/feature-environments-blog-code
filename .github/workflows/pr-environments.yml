@@ -32,4 +32,5 @@ jobs:
           --projectId ${{ secrets.ENV0_PROJECT_ID }}
           --blueprintId ${{ secrets.ENV0_BLUEPRINT_ID }}
           --environmentName "${{ github.head_ref }}"
+          --revision "${{ github.head_ref }}"
 
