@@ -6,11 +6,16 @@ jobs:
   create_environment:
     name: "Create Environment"
     runs-on: ubuntu-16.04
+    env:
+      ACTION: deploy
     steps:
       - name: Dump github context
         run: echo "$GITHUB_CONTEXT"
         env:
           GITHUB_CONTEXT: ${{ toJson(github) }}
+      - name: Set Action
+        if: github.event.action == 'closed'
+        run: echo "::set-env name=ACTION::destroy"
       - uses: actions/setup-node@v1
         with:
           node-version: '12'
@@ -26,7 +31,7 @@ jobs:
           node env0-deploy-cli.js
           -k ${{ secrets.ENV0_API_KEY_ID }}
           -s ${{ secrets.ENV0_API_KEY_SECRET }}
-          -a deploy
+          -a $ACTION
           -o ${{ secrets.ENV0_ORG_ID }}
           -p ${{ secrets.ENV0_PROJECT_ID }}
           -b ${{ secrets.ENV0_BLUEPRINT_ID }}
