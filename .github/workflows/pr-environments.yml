@@ -13,9 +13,9 @@ jobs:
       - name: Set Action
         if: github.event.action == 'closed'
         run: echo "::set-env name=ACTION::destroy"
-      - name: install
+      - name: Install env0 CLI
         run: yarn global add @env0/cli
-      - name: deploy
+      - name: Run CLI
         run: >
           env0 $ACTION
           --apiKey ${{ secrets.ENV0_API_KEY_ID }}
@@ -25,6 +25,3 @@ jobs:
           --blueprintId ${{ secrets.ENV0_BLUEPRINT_ID }}
           --environmentName "${{ github.head_ref }}"
           --revision "${{ github.head_ref }}"
-
-
-          kasdjhfkaj32839r8yfakh!@adlf
