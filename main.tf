@@ -46,14 +46,10 @@ resource "aws_s3_bucket_policy" "website_bucket_policy" {
 POLICY
 }
 
-resource "aws_s3_bucket_object" "website_content" {
-  bucket = aws_s3_bucket.website_bucket.id
-  key    = "index.html"
-  source = local.index_html_file
-  etag = filemd5(local.index_html_file)
-  content_type = "text/html"
-}
-
 output "website_endpoint" {
   value = aws_s3_bucket.website_bucket.website_endpoint
+}
+
+output "s3_bucket_name" {
+  value = aws_s3_bucket.website_bucket.id
 }
