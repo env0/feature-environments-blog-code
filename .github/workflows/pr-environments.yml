@@ -6,20 +6,14 @@ jobs:
   env0_pr_environment:
     name: "PR Environment"
     runs-on: ubuntu-16.04
-    env:
-      ACTION: deploy
+    container: node:12
     steps:
-      - name: Set Action
-        if: github.event.action == 'closed'
-        run: echo "::set-env name=ACTION::destroy"
-      - uses: actions/setup-node@v1
-        with:
-          node-version: '12'
-      - name: install
+      - name: Install env0 CLI
         run: yarn global add @env0/cli
-      - name: deploy
+      - name: Deploy Environment
+        if: github.event.action != 'closed'
         run: >
-          env0 $ACTION
+          env0 deploy
           --apiKey ${{ secrets.ENV0_API_KEY_ID }}
           --apiSecret ${{ secrets.ENV0_API_KEY_SECRET }}
           --organizationId ${{ secrets.ENV0_ORG_ID }}
@@ -27,3 +21,13 @@ jobs:
           --blueprintId ${{ secrets.ENV0_BLUEPRINT_ID }}
           --environmentName "${{ github.head_ref }}"
           --revision "${{ github.head_ref }}"
+      - name: Destroy Environment
+        if: github.event.action == 'closed'
+        run: >
+          env0 destroy
+          --apiKey ${{ secrets.ENV0_API_KEY_ID }}
+          --apiSecret ${{ secrets.ENV0_API_KEY_SECRET }}
+          --organizationId ${{ secrets.ENV0_ORG_ID }}
+          --projectId ${{ secrets.ENV0_PROJECT_ID }}
+          --environmentName "${{ github.head_ref }}"
+
