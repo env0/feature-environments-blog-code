@@ -5,8 +5,8 @@ on:
 jobs:
   env0_pr_environment:
     name: "PR Environment"
-    runs-on: ubuntu-16.04
-    container: node:12
+    runs-on: ubuntu-latest
+    container: node:20
     steps:
       - name: Install env0 CLI
         run: yarn global add @env0/cli
